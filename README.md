@@ -1,1 +1,1 @@
-# VendingMacine
+# VendingMachine
