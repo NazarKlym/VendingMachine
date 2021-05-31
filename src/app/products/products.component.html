@@ -1,8 +1,14 @@
-<ul>
-  <li *ngFor="let product of productsService.products;  index as i " >
-   <b>{{product.name}}</b>        <mark> price :  {{product.price}} </mark>  quantity:  {{product.quantity}}
+
+<table>
+  <tr>
+    <td><b>Category</b></td>
+    <td><b>price</b></td>
+    <td><b>quantity</b></td>
+  </tr>
+  <tr *ngFor="let product of productsService.products;  index as i " >
+   <td>{{product.name}}</td>  <td>{{product.price}} </td> <td> {{product.quantity}}</td>
     <button (click)="productsService.removeProduct(product.id)"> clear </button>
     <button (click)="productsService.editProduct(i)">Edit</button>
-  </li>
-</ul>
+  </tr>
+</table>
 
