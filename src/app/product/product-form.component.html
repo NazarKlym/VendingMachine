@@ -1,0 +1,76 @@
+
+
+<div >
+  <table>
+
+    <tr>
+      <td><b>Category</b></td>
+      <td><b>price</b></td>
+      <td><b>quantity</b></td>
+    </tr>
+          <tr *ngFor="let product of productsService.products;  index as i " >
+            <td>
+                {{product.name}}
+            </td>
+            <td>
+               {{product.price}}
+            </td>
+            <td>
+            <ng-template #editingProduct>
+              <label>
+                <input type="number" [(ngModel)]="product.quantity" (blur)="productsService.doneProduct(product)">
+              </label>
+            </ng-template>
+
+            <div *ngIf="!product.editing, else editingProduct"> {{product.quantity}}</div>
+            </td>
+
+      <div *ngIf="!List"> <button (click)="productsService.removeProduct(product.id)"> clear </button>
+        <button (click)="productsService.editProduct(product)">addItem</button></div>
+
+    </tr>
+  </table>
+</div>
+
+
+<div *ngIf="!List">
+  <br>
+  <tr>
+    <td><b>Category</b></td>
+    <td><b>price</b></td>
+    <td><b>quantity</b></td>
+  </tr>
+
+  <tr>
+    <td>
+      <label>
+        <input  placeholder="new Category" [(ngModel)] ="name"  >
+      </label>
+    </td>
+
+    <td>
+      <label>
+        <input type="number" placeholder="price" [(ngModel)]="price"  >
+      </label>
+    </td>
+
+    <td>
+      <label>
+        <input type="number" placeholder="quantity" [(ngModel)]="quantity">
+      </label>
+    </td>
+
+
+           <td><button (click)="addProduct()">AddCategory</button></td>
+    </tr>
+</div>
+<br>
+    <div>
+        <button *ngIf="!List" (click)="toggle()">List</button>
+        <button *ngIf="List" (click)="toggle()">ADD Category</button>
+    </div>
+
+
+<!--Purchase-->
+
+

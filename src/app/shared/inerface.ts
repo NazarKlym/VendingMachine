@@ -4,4 +4,7 @@ export interface Product {
   price: number;
   quantity: number;
   date?: any;
+  editable?: boolean,
+  editing: boolean,
 }
+
