@@ -1,33 +1,38 @@
 
 
-<div >
-  <table>
-
+<div>
+  <table border="1" width="400px" cellpadding="2">
     <tr>
       <td><b>Category</b></td>
       <td><b>price</b></td>
       <td><b>quantity</b></td>
     </tr>
-          <tr *ngFor="let product of productsService.products;  index as i " >
-            <td>
+          <tr *ngFor="let product of productsService.products; let i = index" >
+            <td width="38%">
                 {{product.name}}
             </td>
-            <td>
-               {{product.price}}
+            <td width="15%">
+               {{product.price|number:'1.2'}}
             </td>
-            <td>
+            <td width="7%">
             <ng-template #editingProduct>
               <label>
-                <input type="number" [(ngModel)]="product.quantity" (blur)="productsService.doneProduct(product)">
+                <input class="quantityInp" type="number" [(ngModel)]="product.quantity"
+                       (blur)="productsService.doneProduct(product)">
               </label>
             </ng-template>
 
             <div *ngIf="!product.editing, else editingProduct"> {{product.quantity}}</div>
             </td>
 
-      <div *ngIf="!List"> <button (click)="productsService.removeProduct(product.id)"> clear </button>
-        <button (click)="productsService.editProduct(product)">addItem</button></div>
-
+      <div *ngIf="!List">
+        <button (click)="productsService.removeProduct(product.id)"> clear </button>
+        <button *ngIf="!product.editing" (click)="productsService.editProduct(product)">addItem</button>
+        <button *ngIf="product.editing" (click)="productsService.doneProduct(product)">addItem</button>
+      </div>
+        <div *ngIf="List">
+          <button (click)="productsService.addOrder(product)">Purchase</button>
+        </div>
     </tr>
   </table>
 </div>
@@ -44,19 +49,19 @@
   <tr>
     <td>
       <label>
-        <input  placeholder="new Category" [(ngModel)] ="name"  >
+        <input  [(ngModel)] ="name"  >
       </label>
     </td>
 
     <td>
       <label>
-        <input type="number" placeholder="price" [(ngModel)]="price"  >
+        <input class="priceInp" type="number"  [(ngModel)]="price"  >
       </label>
     </td>
 
     <td>
       <label>
-        <input type="number" placeholder="quantity" [(ngModel)]="quantity">
+        <input class="quantityInp" type="number"  [(ngModel)]="quantity">
       </label>
     </td>
 
@@ -64,6 +69,8 @@
            <td><button (click)="addProduct()">AddCategory</button></td>
     </tr>
 </div>
+
+
 <br>
     <div>
         <button *ngIf="!List" (click)="toggle()">List</button>
@@ -72,5 +79,25 @@
 
 
 <!--Purchase-->
+<br>
+<div >
+    <span ><h3>Purchase list</h3></span>
+  <table border="1" width="30%" cellpadding="3">
+    <tr>
+      <td><b>Category</b></td>
+      <td><b>price</b></td>
+      <td><b>Date</b></td>
+    </tr>
+    <tr *ngFor="let order of productsService.orders; let i = index" >
+      <td>
+        {{order.name}}
+      </td>
+         <td>
+            {{order.price|number:'1.2'}}
+         </td>
 
-
+          <td>
+              {{order.date|date:'y-M-d'}}
+          </td>
+  </table>
+</div>

@@ -1,5 +1,5 @@
-import {Component, OnInit } from '@angular/core';
-import { Product } from '../shared/inerface';
+import {Component, OnInit,} from '@angular/core';
+import { Product} from '../shared/inerface';
 import {ProductsService} from '../shared/products.service';
 
 
@@ -15,7 +15,6 @@ export class ProductFormComponent implements OnInit {
   editing = false;
 
   editable = false;
-  addButton = 'ADD'
   List: boolean = true;
 
   constructor(public productsService: ProductsService) { }
@@ -24,23 +23,26 @@ export class ProductFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  addProduct(){
+  addProduct() {
 
     if (!this.name) {
-    return;}
+      return;
+    }
 
       const product: Product = {
         name: this.name,
         price: this.price,
         quantity: this.quantity,
         editable: this.editable,
-        id: Date.now(),
+        id: Math.random(),
         editing: this.editing,
       };
       this.productsService.addProduct(product);
-      this.name = ''
-    }
+      this.name = '';
+      this.quantity = 0;
+      this.price = 0.00;
 
+  }
 
 
   toggle(){

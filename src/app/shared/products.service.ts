@@ -1,17 +1,19 @@
 import {Injectable} from '@angular/core';
-import { Product } from './inerface';
+import {Order, Product, } from './inerface';
 
 
 @Injectable({providedIn: 'root'})
 export  class ProductsService {
 
   public products: Product[] = [
-    {id: 1, name: 'chocolate', price: 11.8, quantity: 2, editing: false},
-    {id: 2, name: 'Cracker', price: 12.4, quantity: 5, editing: false},
-    {id: 3, name: 'Donut', price: 15.00, quantity: 12, editing: false},
+    {id: 1, name: 'chocolate', price: 11.8, quantity: 2, editing: false, date:new Date ()},
+    {id: 2, name: 'Cracker', price: 12.4, quantity: 5, editing: false, date:new Date ()},
+    {id: 3, name: 'Donut', price: 15.00, quantity: 12, editing: false, date:new Date ()},
     ];
 
-  List: boolean = true;
+  public  orders: Order [] = [
+    {id: 4, name: 'Donut', price: 15.00, quantity: 12, editing: false, date:new Date ()},
+  ];
 
   removeProduct(id: number) {
     this.products = this.products.filter(p => p.id !== id);
@@ -28,10 +30,11 @@ export  class ProductsService {
     product.editing = false;
   }
 
+  addOrder(product: Product){
+    this.orders.push(product)
+
+  }
+
 
 }
-// let name = this.products[id].name;
-// let result = prompt("Edit Title", name);
-// if (result !== null && result !== "") {
-//   this.products[id].name = result;
-// }
+
