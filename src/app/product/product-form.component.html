@@ -17,8 +17,8 @@
             <td width="7%">
             <ng-template #editingProduct>
               <label>
-                <input class="quantityInp" type="number" [(ngModel)]="product.quantity"
-                       (blur)="productsService.doneProduct(product)">
+                <input class="quantityInp" type="number" min="0" [(ngModel)]="product.quantity"
+                       (blur)="productsService.done_editProduct(product)">
               </label>
             </ng-template>
 
@@ -28,10 +28,11 @@
       <div *ngIf="!List">
         <button (click)="productsService.removeProduct(product.id)"> clear </button>
         <button *ngIf="!product.editing" (click)="productsService.editProduct(product)">addItem</button>
-        <button *ngIf="product.editing" (click)="productsService.doneProduct(product)">addItem</button>
+        <button *ngIf="product.editing" (click)="productsService.done_editProduct(product)">addItem</button>
       </div>
         <div *ngIf="List">
-          <button (click)="productsService.addOrder(product)">Purchase</button>
+          <button *ngIf="product.quantity > 0 "
+                  (click)="productsService.addOrder(product.id, product) ">Purchase</button>
         </div>
     </tr>
   </table>
@@ -39,6 +40,8 @@
 
 
 <div *ngIf="!List">
+
+
   <br>
   <tr>
     <td><b>Category</b></td>
@@ -49,19 +52,19 @@
   <tr>
     <td>
       <label>
-        <input  [(ngModel)] ="name"  >
+        <input  [(ngModel)] ="name" pattern="^[a-zA-Z\s]+$" >
       </label>
     </td>
 
     <td>
       <label>
-        <input class="priceInp" type="number"  [(ngModel)]="price"  >
+        <input min="0" class="priceInp" type="number"   [(ngModel)]="price"  >
       </label>
     </td>
 
     <td>
       <label>
-        <input class="quantityInp" type="number"  [(ngModel)]="quantity">
+        <input min="0" class="quantityInp" type="number"  [(ngModel)]="quantity">
       </label>
     </td>
 
@@ -79,6 +82,9 @@
 
 
 <!--Purchase-->
+<div >
+<br>
+<span><button (click)="productsService.totalOrder()">report</button></span>
 <br>
 <div >
     <span ><h3>Purchase list</h3></span>
@@ -89,9 +95,10 @@
       <td><b>Date</b></td>
     </tr>
     <tr *ngFor="let order of productsService.orders; let i = index" >
-      <td>
-        {{order.name}}
-      </td>
+          <td>
+            {{order.name}}
+          </td>
+
          <td>
             {{order.price|number:'1.2'}}
          </td>
@@ -99,5 +106,7 @@
           <td>
               {{order.date|date:'y-M-d'}}
           </td>
+    <tr>Total:</tr>
   </table>
+  </div>
 </div>

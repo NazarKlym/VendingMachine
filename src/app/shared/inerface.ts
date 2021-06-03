@@ -12,8 +12,7 @@ export  interface Order {
   id: number;
   name: string;
   price: number;
-  quantity: number;
+  quantity?: number;
   date?: any;
-  editable?: boolean,
-  editing: boolean,
+
 }
