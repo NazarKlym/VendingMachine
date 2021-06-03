@@ -1,5 +1,5 @@
 import {Component, OnInit,} from '@angular/core';
-import {Order, Product} from '../shared/inerface';
+import {Product} from '../shared/inerface';
 import {ProductsService} from '../shared/products.service';
 
 @Component({
@@ -17,12 +17,10 @@ export class ProductFormComponent implements OnInit {
 
   constructor(public productsService: ProductsService) { }
 
-
   ngOnInit(): void {
   }
 
   addProduct() {
-
     if (!this.name) {
       return;
     }

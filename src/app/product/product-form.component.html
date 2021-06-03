@@ -32,7 +32,7 @@
       </div>
         <div *ngIf="List">
           <button *ngIf="product.quantity > 0 "
-                  (click)="productsService.addOrder(product.id, product) ">Purchase</button>
+                  (click)="productsService.purchaseProduct(product.id, product) ">Purchase</button>
         </div>
     </tr>
   </table>
@@ -84,7 +84,7 @@
 <!--Purchase-->
 <div >
 <br>
-<span><button (click)="productsService.totalOrder()">report</button></span>
+<span><button >report</button></span>
 <br>
 <div >
     <span ><h3>Purchase list</h3></span>

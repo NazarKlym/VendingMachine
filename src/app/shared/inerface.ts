@@ -3,7 +3,6 @@ export interface Product {
   name: string;
   price: number;
   quantity: number;
-  date?: any;
   editable?: boolean,
   editing: boolean,
 }
@@ -13,6 +12,6 @@ export  interface Order {
   name: string;
   price: number;
   quantity?: number;
-  date?: any;
+  date: any;
 
 }
