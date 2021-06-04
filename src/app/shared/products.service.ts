@@ -1,4 +1,6 @@
+
 import {Injectable} from '@angular/core';
+import * as moment from 'moment';
 import {Order, Product, } from './inerface';
 
 
@@ -40,9 +42,36 @@ export  class ProductsService {
       price: product.price,
       quantity:1,
       date: new Date(),
+
     }
 
     this.orders.push(order)
   }
+
+  ordersReport(dateFrom: Date, dateTo: Date) {
+
+    const preparedDateTo = dateTo || new Date();
+
+    const result = this.orders.filter(order => dateFrom ? moment(order.date).isBetween(dateFrom, preparedDateTo) : true);
+
+     let report = result.reduce((sum, currentOrder) => {
+       // @ts-ignore
+       let reportForProduct = sum [currentOrder.name];
+
+       return {
+         ...sum,
+         [currentOrder.name]: {
+           total: reportForProduct ? reportForProduct.total + currentOrder.price : currentOrder.price,
+           quantity: reportForProduct ? reportForProduct.quantity + currentOrder.quantity : currentOrder.quantity,
+         },
+         total: sum.total + currentOrder.price
+       }
+     }, {total: 0})
+
+        return report
+  }
+
+
 }
+
 

@@ -7,7 +7,7 @@
       <td><b>price</b></td>
       <td><b>quantity</b></td>
     </tr>
-          <tr *ngFor="let product of productsService.products; let i = index" >
+          <tr *ngFor="let product of productsService.products; " >
             <td width="38%">
                 {{product.name}}
             </td>
@@ -84,7 +84,12 @@
 <!--Purchase-->
 <div >
 <br>
-<span><button >report</button></span>
+<span><button (click)="ordersReport()">report</button></span>
+
+  <input type='date' [(ngModel)]='dateFrom' />
+  <input type='date' [(ngModel)]='dateTo'/>
+
+  <br>
 <br>
 <div >
     <span ><h3>Purchase list</h3></span>
@@ -94,7 +99,7 @@
       <td><b>price</b></td>
       <td><b>Date</b></td>
     </tr>
-    <tr *ngFor="let order of productsService.orders; let i = index" >
+    <tr *ngFor="let order of productsService.orders; " >
           <td>
             {{order.name}}
           </td>
@@ -105,8 +110,11 @@
 
           <td>
               {{order.date|date:'y-M-d'}}
-          </td>
-    <tr>Total:</tr>
+          </td >
+
   </table>
+  {{x| json}}
   </div>
+
+
 </div>

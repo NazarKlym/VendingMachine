@@ -14,6 +14,10 @@ export class ProductFormComponent implements OnInit {
   editing = false;
   editable = false;
   List: boolean = true;
+  dateFrom: any;
+  dateTo: any;
+  x:any;
+
 
   constructor(public productsService: ProductsService) { }
 
@@ -24,11 +28,13 @@ export class ProductFormComponent implements OnInit {
     if (!this.name) {
       return;
     }
+    if (!this.price) {
+      return;
+    }
       const product: Product = {
         name: this.name,
         price: this.price,
         quantity: this.quantity,
-        editable: this.editable,
         id: Math.random(),
         editing: this.editing,
       };
@@ -40,6 +46,13 @@ export class ProductFormComponent implements OnInit {
 
   toggle(){
     this.List = !this.List;
+  }
+
+
+   ordersReport(){
+
+   this.x = this.productsService.ordersReport(this.dateFrom, this.dateTo, );
+
   }
 
 
