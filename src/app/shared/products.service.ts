@@ -6,7 +6,9 @@ import {Order, Product,} from './inerface';
 @Injectable({providedIn: 'root'})
 export  class ProductsService {
 
-  public products: Product[] = [];
+  public products: Product[] = [
+    ];
+
   public  orders: Order [] = [];
 
   removeProduct(id: number) {
@@ -40,9 +42,10 @@ export  class ProductsService {
     this.orders.push(order)
   }
 
-  ordersReport(dateFrom: Date, dateTo: Date) {
+  ordersReport(dateFrom: Date) {
 
-    const preparedDateTo = dateTo || new Date();
+    const preparedDateTo =  new Date();
+
     const result = this.orders.filter(order => dateFrom ? moment(order.date).isBetween(dateFrom, preparedDateTo) : true);
 
     return result.reduce((sum, currentOrder) => {

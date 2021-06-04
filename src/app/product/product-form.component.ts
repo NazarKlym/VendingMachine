@@ -49,7 +49,7 @@ export class ProductFormComponent implements OnInit {
   }
 
    ordersReport(){
-   this.reportList = this.productsService.ordersReport(this.dateFrom, this.dateTo, );
+   this.reportList = this.productsService.ordersReport(this.dateFrom);
   }
 
 }
