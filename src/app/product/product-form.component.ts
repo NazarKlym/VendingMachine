@@ -13,10 +13,10 @@ export class ProductFormComponent implements OnInit {
   price = 0;
   editing = false;
   editable = false;
-  List: boolean = true;
+  listProducts: boolean = true;
   dateFrom: any;
   dateTo: any;
-  x:any;
+  reportList:any;
 
 
   constructor(public productsService: ProductsService) { }
@@ -45,15 +45,11 @@ export class ProductFormComponent implements OnInit {
   }
 
   toggle(){
-    this.List = !this.List;
+    this.listProducts = !this.listProducts;
   }
-
 
    ordersReport(){
-
-   this.x = this.productsService.ordersReport(this.dateFrom, this.dateTo, );
-
+   this.reportList = this.productsService.ordersReport(this.dateFrom, this.dateTo, );
   }
-
 
 }

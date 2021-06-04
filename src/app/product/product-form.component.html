@@ -1,12 +1,13 @@
 
-
 <div>
-  <table border="1" width="400px" cellpadding="2">
-    <tr>
-      <td><b>Category</b></td>
-      <td><b>price</b></td>
-      <td><b>quantity</b></td>
-    </tr>
+    <div>
+      <table border="1" width="400px" cellpadding="2" >
+            <tr *ngIf="productsService.products.length>0">
+              <td><b>Category</b></td>
+                 <td><b>Price</b></td>
+                    <td><b>Quantity</b></td>
+                </tr>
+
           <tr *ngFor="let product of productsService.products; " >
             <td width="38%">
                 {{product.name}}
@@ -25,12 +26,12 @@
             <div *ngIf="!product.editing, else editingProduct"> {{product.quantity}}</div>
             </td>
 
-      <div *ngIf="!List">
+      <div *ngIf="!listProducts">
         <button (click)="productsService.removeProduct(product.id)"> clear </button>
         <button *ngIf="!product.editing" (click)="productsService.editProduct(product)">addItem</button>
         <button *ngIf="product.editing" (click)="productsService.done_editProduct(product)">addItem</button>
       </div>
-        <div *ngIf="List">
+        <div *ngIf="listProducts">
           <button *ngIf="product.quantity > 0 "
                   (click)="productsService.purchaseProduct(product.id, product) ">Purchase</button>
         </div>
@@ -38,10 +39,7 @@
   </table>
 </div>
 
-
-<div *ngIf="!List">
-
-
+<div *ngIf="!listProducts">
   <br>
   <tr>
     <td><b>Category</b></td>
@@ -52,7 +50,7 @@
   <tr>
     <td>
       <label>
-        <input  [(ngModel)] ="name" pattern="^[a-zA-Z\s]+$" >
+        <input  [(ngModel)] ="name" >
       </label>
     </td>
 
@@ -67,36 +65,25 @@
         <input min="0" class="quantityInp" type="number"  [(ngModel)]="quantity">
       </label>
     </td>
-
-
            <td><button (click)="addProduct()">AddCategory</button></td>
     </tr>
 </div>
-
-
 <br>
     <div>
-        <button *ngIf="!List" (click)="toggle()">List</button>
-        <button *ngIf="List" (click)="toggle()">ADD Category</button>
+        <button *ngIf="!listProducts" (click)="toggle()">List</button>
+        <button *ngIf="listProducts" (click)="toggle()">ADD Category</button>
     </div>
+</div>
 
+<!--Purchase List-->
 
-<!--Purchase-->
-<div >
-<br>
-<span><button (click)="ordersReport()">report</button></span>
-
-  <input type='date' [(ngModel)]='dateFrom' />
-  <input type='date' [(ngModel)]='dateTo'/>
-
-  <br>
-<br>
-<div >
+<div>
+  <div *ngIf="productsService.orders.length > 0">
     <span ><h3>Purchase list</h3></span>
   <table border="1" width="30%" cellpadding="3">
     <tr>
       <td><b>Category</b></td>
-      <td><b>price</b></td>
+      <td><b>Price</b></td>
       <td><b>Date</b></td>
     </tr>
     <tr *ngFor="let order of productsService.orders; " >
@@ -111,10 +98,16 @@
           <td>
               {{order.date|date:'y-M-d'}}
           </td >
-
-  </table>
-  {{x| json}}
-  </div>
-
-
+     </table>
 </div>
+  <div *ngIf="productsService.orders.length > 0">
+    <br>
+        <input type='date' [(ngModel)]='dateFrom' />
+           <input type='date' [(ngModel)]='dateTo'/>
+             <span><button (click)="ordersReport()">report</button></span>
+           <br>
+          <br>
+        <span>{{reportList| json}}</span>
+    </div>
+</div>
+
