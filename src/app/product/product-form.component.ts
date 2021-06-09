@@ -15,8 +15,8 @@ export class ProductFormComponent implements OnInit {
   editable = false;
   listProducts: boolean = true;
   dateFrom: any;
-  dateTo: any;
   reportList:any;
+
 
 
   constructor(public productsService: ProductsService) { }

@@ -6,13 +6,12 @@ import {Order, Product,} from './inerface';
 @Injectable({providedIn: 'root'})
 export  class ProductsService {
 
-  public products: Product[] = [
-    ];
+  public products: Product[] = [];
 
   public  orders: Order [] = [];
 
-  removeProduct(id: number) {
-    this.products = this.products.filter(p => p.id !== id);
+  removeProduct() {
+      this.products = this.products.filter(p => p.quantity !== 0)
   }
 
   addProduct(product: Product) {
@@ -27,8 +26,11 @@ export  class ProductsService {
     product.editing = false;
   }
 
-  purchaseProduct(id: number, product: Product) {
-   this.products.find(p => p.id === id)
+  sortProduct( ){
+    this.products.sort((a, b) => a.quantity - b.quantity);
+  }
+
+  purchaseProduct( product: Product) {
     product.quantity --;
 
     const order = {

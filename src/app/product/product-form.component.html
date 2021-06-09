@@ -27,15 +27,20 @@
             </td>
 
       <div *ngIf="!listProducts">
-        <button (click)="productsService.removeProduct(product.id)"> clear </button>
+
         <button *ngIf="!product.editing" (click)="productsService.editProduct(product)">addItem</button>
         <button *ngIf="product.editing" (click)="productsService.done_editProduct(product)">addItem</button>
       </div>
         <div *ngIf="listProducts">
           <button *ngIf="product.quantity > 0 "
-                  (click)="productsService.purchaseProduct(product.id, product) ">Purchase</button>
+                  (click)="productsService.purchaseProduct(product) ">Purchase</button>
         </div>
     </tr>
+
+        <br>
+              <div *ngIf="!listProducts">
+                  <button *ngIf="productsService.products.length > 0" (click)="productsService.removeProduct()"> clear </button>
+              </div>
   </table>
 </div>
 
@@ -70,7 +75,8 @@
 </div>
 <br>
     <div>
-        <button *ngIf="!listProducts" (click)="toggle()">List</button>
+        <button *ngIf="!listProducts"(click)="toggle(); productsService.sortProduct()">List</button>
+
         <button *ngIf="listProducts" (click)="toggle()">ADD Category</button>
     </div>
 </div>
@@ -88,16 +94,16 @@
     </tr>
     <tr *ngFor="let order of productsService.orders; " >
           <td>
-            {{order.name}}
+              {{order.name}}
           </td>
 
          <td>
-            {{order.price|number:'1.2'}}
+           {{order.price|number:'1.2'}}
          </td>
 
           <td>
               {{order.date|date:'y-M-d'}}
-          </td >
+          </td>
      </table>
 </div>
   <div *ngIf="productsService.orders.length > 0">
