@@ -13,3 +13,10 @@ export  interface Order {
   quantity: number;
   date: any;
 }
+
+export  interface Report {
+  name?: string;
+  quantity?: number;
+  price? :number;
+
+}

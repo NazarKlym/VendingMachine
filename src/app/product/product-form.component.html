@@ -1,7 +1,6 @@
-
-<div>
+<div class="fullList">
     <div>
-      <table border="1" width="400px" cellpadding="2" >
+      <table border="1" width="460px" cellpadding="2" >
             <tr *ngIf="productsService.products.length>0">
               <td><b>Category</b></td>
                  <td><b>Price</b></td>
@@ -9,13 +8,13 @@
                 </tr>
 
           <tr *ngFor="let product of productsService.products; " >
-            <td width="38%">
+            <td width="30%">
                 {{product.name}}
             </td>
-            <td width="15%">
+            <td width="20%">
                {{product.price|number:'1.2'}}
             </td>
-            <td width="7%">
+            <td width="20%">
             <ng-template #editingProduct>
               <label>
                 <input class="quantityInp" type="number" min="0" [(ngModel)]="product.quantity"
@@ -26,23 +25,21 @@
             <div *ngIf="!product.editing, else editingProduct"> {{product.quantity}}</div>
             </td>
 
-      <div *ngIf="!listProducts">
+      <div class="btnAddItem" *ngIf="!listProducts">
 
         <button *ngIf="!product.editing" (click)="productsService.editProduct(product)">addItem</button>
         <button *ngIf="product.editing" (click)="productsService.done_editProduct(product)">addItem</button>
       </div>
-        <div *ngIf="listProducts">
+        <div class="btnPurchase" *ngIf="listProducts">
           <button *ngIf="product.quantity > 0 "
                   (click)="productsService.purchaseProduct(product) ">Purchase</button>
         </div>
     </tr>
-
-        <br>
-              <div *ngIf="!listProducts">
-                  <button *ngIf="productsService.products.length > 0" (click)="productsService.removeProduct()"> clear </button>
+        <div *ngIf="!listProducts">
+          <button *ngIf="productsService.products.length > 0" (click)="productsService.removeProduct()"> clear </button>
               </div>
   </table>
-</div>
+
 
 <div *ngIf="!listProducts">
   <br>
@@ -86,7 +83,7 @@
 <div>
   <div *ngIf="productsService.orders.length > 0">
     <span ><h3>Purchase list</h3></span>
-  <table border="1" width="30%" cellpadding="3">
+  <table border="1" width="37%" cellpadding="3">
     <tr>
       <td><b>Category</b></td>
       <td><b>Price</b></td>
@@ -104,15 +101,39 @@
           <td>
               {{order.date|date:'y-M-d'}}
           </td>
+
      </table>
 </div>
-  <div *ngIf="productsService.orders.length > 0">
-    <br>
-        <input type='date' [(ngModel)]='dateFrom' />
-             <span><button (click)="ordersReport()">report</button></span>
+  <br>
+
+
+<!--Report List-->
+<div *ngIf="productsService.orders.length > 0">
+    <label>
+      <input type='date' [(ngModel)]='dateFrom' />
+    </label>
+    <span><button (click)="ordersReport()">report</button></span>
+      <br>
            <br>
-          <br>
-        <span>{{reportList| json}}</span>
-    </div>
+</div>
+  <div *ngIf="reportList">
+
+    <table border="1" width="37%" cellpadding="2">
+    <tr>
+      <td><b>Category</b></td>
+      <td><b>Price</b></td>
+      <td><b>Quantity</b></td>
+    </tr>
+          <tr *ngFor="let report of productsService.reports">
+    <td>{{report.name}}</td>
+    <td>{{report.price}}</td>
+    <td>{{report.quantity}}</td>
+  </tr>
+      <span>Total sum: </span>  <span><b>{{reportList| json}}</b></span>
+  </table>
+
 </div>
 
+</div>
+
+</div>
