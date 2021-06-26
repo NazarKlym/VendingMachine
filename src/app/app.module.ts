@@ -1,27 +1,23 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
 import { ProductFormComponent } from './product/product-form.component';
 import {FormsModule} from '@angular/forms';
-import {MatInputModule} from '@angular/material/input';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { OrderComponent } from './order/order.component';
+import { ReportComponent } from './report/report.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    OrderComponent,
+    ReportComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+
     FormsModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
     BrowserAnimationsModule
   ],
   providers: [],

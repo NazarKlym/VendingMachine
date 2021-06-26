@@ -50,6 +50,8 @@ export  class ProductsService {
 
   ordersReport(dateFrom: Date) {
 
+    this.reports = [];
+
     const preparedDateTo = new Date();
 
     const result = this.orders.filter(order => dateFrom ? moment(order.date).isBetween(dateFrom, preparedDateTo) : true);
@@ -76,8 +78,8 @@ export  class ProductsService {
 
       // @ts-ignore
       let productResult = {...reportList[key], name: key};
-      this.reports.push(productResult);
 
+      this.reports.push(productResult);
     })
     return result.reduce(function(acc, curr) {
       return acc + curr.quantity * curr.price;

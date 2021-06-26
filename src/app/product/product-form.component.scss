@@ -1,21 +1,101 @@
-.quantityInp{
-  width: 50px;
-}
-.priceInp{
-  width: 50px;
-}
-
-td{
+.contentList{
   text-align: center;
+  justify-content: center;
+  display: flex;
 }
 
-.btnAddItem{
-  padding-left: 20px;
+table{
+  width: 500px;
+ background: #c2ff98;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  border-radius: 15px;
 }
+
+.inputs{
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.priceInp{
+  background: #acf8ff;
+  width: 40px;
+  height: 25px;
+}
+
+.inputQuantity{
+  background: #acf8ff;
+  width: 50px;
+  height: 25px;
+  border-radius: 0 7px 7px 0;
+
+}
+
+.inputName{
+  background: #acf8ff;
+  width: 140px;
+  height: 25px;
+  border-radius: 7px 0 0 7px;
+}
+
+.quantityInpEdit{
+  width: 35px;
+  background: #acf8ff;
+  border-color: #acf8ff;
+}
+
+//button
 
 .btnPurchase{
-  padding-left: 15px;
+  background: #c2ff98;
+  border-color: brown;
+  color: brown;
+  width: 100px;
+  border-radius: 7px;
+  margin-left: -40px;
+  margin-top: 2px;
+  font-size: small;
 }
-.fullList{
- padding-left: 250px;
+
+.btnClear{
+  width:180px;
+  height: 22px;
+  font-size: 15px;
+  border-radius: 7px;
+  border-color: blueviolet;
+  color: #621aa4;
 }
+
+.addCategory1{
+  width: 300px;
+  height: 25px;
+  background: #c2ff98;
+  font-size: 15px;
+  border-radius: 25px;
+  color: brown;
+  border-color: brown;
+  background-size: 2px;
+  margin-top: 15px;
+}
+
+.addCategory2{
+   border-radius: 12px;
+   border-color: blueviolet;
+   width: 100px;
+   height: 30px;
+   color: #621aa4;
+   margin-left: 5px;
+
+ }
+
+.btnList{
+    border-color: #acf8ff;
+    background: #9b1b73;
+    width: 120px;
+    height: 30px;
+    color: #b5f89b;
+    font-size: 16px;
+  margin-top: 20px;
+  }
+

@@ -1,139 +1,75 @@
-<div class="fullList">
-    <div>
-      <table border="1" width="460px" cellpadding="2" >
-            <tr *ngIf="productsService.products.length>0">
-              <td><b>Category</b></td>
-                 <td><b>Price</b></td>
-                    <td><b>Quantity</b></td>
-                </tr>
-
-          <tr *ngFor="let product of productsService.products; " >
-            <td width="30%">
-                {{product.name}}
-            </td>
-            <td width="20%">
-               {{product.price|number:'1.2'}}
-            </td>
-            <td width="20%">
-            <ng-template #editingProduct>
-              <label>
-                <input class="quantityInp" type="number" min="0" [(ngModel)]="product.quantity"
-                       (blur)="productsService.done_editProduct(product)">
-              </label>
+<div class="contentList">
+    <table *ngIf="productsService.products.length>0">
+       <tr >
+          <td><b>Category</b></td>
+             <td><b>Price</b></td>
+                 <td><b>Quantity</b></td>
+            </tr>
+      <tr *ngFor="let product of productsService.products; " >
+          <td >{{product.name}}</td>
+            <td>{{product.price|number:'1.2'}}</td>
+                <td>
+                   <ng-template #editingProduct>
+                       <label>
+                         <input class="quantityInpEdit" type="number" min="0" [(ngModel)]="product.quantity"
+                 (blur)="productsService.done_editProduct(product)">
+               </label>
             </ng-template>
-
-            <div *ngIf="!product.editing, else editingProduct"> {{product.quantity}}</div>
-            </td>
-
-      <div class="btnAddItem" *ngIf="!listProducts">
-
-        <button *ngIf="!product.editing" (click)="productsService.editProduct(product)">addItem</button>
-        <button *ngIf="product.editing" (click)="productsService.done_editProduct(product)">addItem</button>
-      </div>
-        <div class="btnPurchase" *ngIf="listProducts">
-          <button *ngIf="product.quantity > 0 "
-                  (click)="productsService.purchaseProduct(product) ">Purchase</button>
-        </div>
-    </tr>
-        <div *ngIf="!listProducts">
-          <button *ngIf="productsService.products.length > 0" (click)="productsService.removeProduct()"> clear </button>
-              </div>
-  </table>
-
-
-<div *ngIf="!listProducts">
-  <br>
-  <tr>
-    <td><b>Category</b></td>
-    <td><b>price</b></td>
-    <td><b>quantity</b></td>
-  </tr>
-
-  <tr>
-    <td>
-      <label>
-        <input  [(ngModel)] ="name" >
-      </label>
+      <div *ngIf="!product.editing, else editingProduct"> {{product.quantity}}</div>
     </td>
 
-    <td>
-      <label>
-        <input min="0" class="priceInp" type="number"   [(ngModel)]="price"  >
-      </label>
-    </td>
-
-    <td>
-      <label>
-        <input min="0" class="quantityInp" type="number"  [(ngModel)]="quantity">
-      </label>
-    </td>
-           <td><button (click)="addProduct()">AddCategory</button></td>
-    </tr>
-</div>
-<br>
-    <div>
-        <button *ngIf="!listProducts"(click)="toggle(); productsService.sortProduct()">List</button>
-
-        <button *ngIf="listProducts" (click)="toggle()">ADD Category</button>
+    <div  *ngIf="!listProducts">
+      <button *ngIf="!product.editing" (click)="productsService.editProduct(product)">add Item</button>
+      <button *ngIf="product.editing" (click)="productsService.done_editProduct(product)">add Item</button>
     </div>
-</div>
 
-<!--Purchase List-->
-
-<div>
-  <div *ngIf="productsService.orders.length > 0">
-    <span ><h3>Purchase list</h3></span>
-  <table border="1" width="37%" cellpadding="3">
-    <tr>
-      <td><b>Category</b></td>
-      <td><b>Price</b></td>
-      <td><b>Date</b></td>
-    </tr>
-    <tr *ngFor="let order of productsService.orders; " >
-          <td>
-              {{order.name}}
-          </td>
-
-         <td>
-           {{order.price|number:'1.2'}}
-         </td>
-
-          <td>
-              {{order.date|date:'y-M-d'}}
-          </td>
-
-     </table>
-</div>
-  <br>
-
-
-<!--Report List-->
-<div *ngIf="productsService.orders.length > 0">
-    <label>
-      <input type='date' [(ngModel)]='dateFrom' />
-    </label>
-    <span><button (click)="ordersReport()">report</button></span>
-      <br>
-           <br>
-</div>
-  <div *ngIf="reportList">
-
-    <table border="1" width="37%" cellpadding="2">
-    <tr>
-      <td><b>Category</b></td>
-      <td><b>Price</b></td>
-      <td><b>Quantity</b></td>
-    </tr>
-          <tr *ngFor="let report of productsService.reports">
-    <td>{{report.name}}</td>
-    <td>{{report.price}}</td>
-    <td>{{report.quantity}}</td>
+    <div  *ngIf="listProducts">
+      <button class="btnPurchase" *ngIf="product.quantity > 0 "
+              (click)="productsService.purchaseProduct(product) ">Purchase</button>
+    </div>
   </tr>
-      <span>Total sum: </span>  <span><b>{{reportList| json}}</b></span>
-  </table>
-
+</table>
 </div>
 
+<div class="inputs">
+      <div>
+         <div *ngFor="let product of productsService.products;">
+             <div *ngIf="!listProducts ">
+        <button class="btnClear"  *ngIf="product.quantity == 0" (click)="productsService.removeProduct()">clear</button>
+       </div>
+    </div>
+
+  <div *ngIf="!listProducts">
+    <br>
+    <tr>
+      <td><b>Category</b></td>
+      <td><b>price</b></td>
+      <td><b>quantity</b></td>
+    </tr>
+    <tr>
+      <td>
+        <label>
+          <input class="inputName" [(ngModel)] ="name"  >
+        </label>
+      </td>
+      <td>
+        <label>
+          <input class="priceInp"  min="0" type="number"   [(ngModel)]="price"  >
+        </label>
+      </td>
+      <td>
+        <label>
+          <input  class="inputQuantity" min="0"  type="number"  [(ngModel)]="quantity">
+        </label>
+      </td>
+      <td><button class="addCategory2" (click)="addProduct()">Add Category</button></td>
+    </tr>
+  </div>
+  <div>
+    <button class="btnList" *ngIf="!listProducts" (click)="toggle(); productsService.sortProduct()">List</button>
+    <button class="addCategory1" *ngIf="listProducts" (click)="toggle()">ADD Category</button>
+  </div>
+  </div>
 </div>
 
-</div>
+
